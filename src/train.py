@@ -1,3 +1,7 @@
+import os 
+import joblib
+import matplotlib.pyplot as plt
+
 from sklearn.datasets import load_iris
 iris = load_iris()
 X = iris.data      # shape (150, 4)
@@ -23,13 +27,15 @@ model = DecisionTreeClassifier(max_depth=3, random_state=42)
 model.fit(X_train, y_train)
 y_pred2 = model.predict(X_test)
 print("k-NN accuracy:", accuracy_score(y_test, y_pred2))
-import os
-import matplotlib.pyplot as plt
+
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 # Example data — replace these with your own
-y_true = [0, 1, 2, 2, 0, 1, 1, 0, 2, 1]
-y_pred = [0, 0, 2, 2, 0, 1, 1, 1, 2, 2]
+# y_true = [0, 1, 2, 2, 0, 1, 1, 0, 2, 1]
+#  y_pred = [0, 0, 2, 2, 0, 1, 1, 1, 2, 2]
+y_true = y_test
+
+y_pred = model.predict(X_test)
 
 # Define class labels (replace with your actual class names)
 class_labels = [ 'Setosa', 'Versicolor', 'Virginica']
@@ -52,15 +58,14 @@ plt.close()
 
 print("✅ Confusion matrix saved as outputs/confusion_matrix.png")
 # SAve code
-import os
-import joblib
+
 
 # Example: assume you have a trained model (replace with your actual model)
 # e.g., from sklearn.ensemble import RandomForestClassifier
 # model = RandomForestClassifier().fit(X_train, y_train)
 
 # Make sure you have a trained model
-model = ...  # <-- your trained model object
+# model = ...  # <-- your trained model object
 
 # Ensure the outputs folder exists
 os.makedirs("outputs", exist_ok=True)
